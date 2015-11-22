@@ -14,16 +14,26 @@
   <div>
     <div id="title">Good Search</div>
     <div>
-      <div >
+      <div>
         <input id="searchInput" type="text" ng-model="searchKeyWord" placeholder="Type your key words" class="col-md-7 col-md-offset-2"></input>
       </div>
-      <button id="searchBtn" ng-click="search()"class="btn btn-default col-md-1">Search</button>
+      <div>
+        <button id="searchBtn" ng-click="search()" class="btn btn-default col-md-1">Search</button>
+      </div>
     </div>
     <div>
-      <div id="chart_div"></div>
+      <div>
+        <div id="chart_div"></div>
+      </div>
+
+      <div class="headline-region" ng-repeat="hl in headlines">
+        <div class="headline">
+          <img src="{{hl.img}}"></img>
+          <p>{{hl.title}}</p>
+        </div>
+      </div>
     </div>
 
-    <div></div>
   </div>
 </body>
 
