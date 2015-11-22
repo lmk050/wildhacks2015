@@ -1,4 +1,4 @@
-app = angular.module('myApp', []);
+app = angular.module('myApp', ['ngAnimate']);
 app.controller('MainCtrl', function($scope, $http) {
   $scope.searchKeyWord = ""
   $scope.date=""
