@@ -53,18 +53,3 @@ body {
   opacity: 0.9;
   border-radius: 5px;
 }
-
-/* The starting CSS styles for the enter animation */
-
-.fade.ng-hide-remove {
-  transition: 0.3s linear all;
-  opacity: 0;
-}
-
-
-/* The finishing CSS styles for the enter animation */
-
-.fade.ng-hide-add {
-  /*transition:0.5s linear all;*/
-  opacity: 1;
-}
