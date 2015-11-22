@@ -65,6 +65,9 @@ app.controller('MainCtrl', function($scope, $http) {
       vAxis: {
         gridlines: {
           color: '#333'
+        },
+        textStyle: {
+          color: '#333'
         }
       },
       backgroundColor: '#333',
