@@ -16,3 +16,8 @@ body {
 #search {
   color: #333;
 }
+
+#chart_div{
+  width: 50%;
+  margin: 50px;
+}
