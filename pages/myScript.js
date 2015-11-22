@@ -1,3 +1,5 @@
+var searchKeyWord = "isis";
+
 google.load('visualization', '1', {
   packages: ['corechart', 'line']
 });
@@ -15,8 +17,12 @@ function drawBackgroundColor() {
   ]);
 
   var options = {
+    'title': 'Your search on Google trends',
+    'width':400,
+    'height':300,
     hAxis: {
-      title: 'Time'
+      title: 'Time',
+      format : 'M/d/yy'
     },
     vAxis: {
       title: 'Trend Index'
@@ -30,12 +36,23 @@ function drawBackgroundColor() {
   function selectHandler() {
     // event handler for point selection
     var selectedItem = chart.getSelection()[0];
+
     if (selectedItem) {
-      var value = data.getValue(selectedItem.row, selectedItem.column);
-      alert('The user selected ' + value);
+      var date = data.getValue(selectedItem.row,0).toDateString()
+      console.log(date);
+      var query = encodeURIComponent(searchKeyWord + " " + date)
+      $.ajax({
+        url: "http://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=" + query
+      }).done(function(data) {
+        console.log(data);
+      });
+      alert('The user selected ' + date);
     }
   }
-  
+
   google.visualization.events.addListener(chart, 'select', selectHandler);
   chart.draw(data, options);
 }
+
+
+// ajax crap
