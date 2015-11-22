@@ -26,10 +26,16 @@
         <div id="chart_div"></div>
       </div>
 
-      <div class="headline-region" ng-repeat="hl in headlines">
-        <div class="headline">
-          <img src="{{hl.img}}"></img>
-          <p>{{hl.title}}</p>
+      <div>
+        <div ng-repeat="hls in headlines" id="{{hls.key}}" ng-show="false" >
+            <div class="headline-region" ng-repeat="hl in hls.contents">
+              <div class="headline">
+                <a href="{{hl.url}}">
+                  <img src="{{hl.img}}"></img>
+                </a>
+                <p>{{hl.title}}</p>
+              </div>
+            </div>
         </div>
       </div>
     </div>
