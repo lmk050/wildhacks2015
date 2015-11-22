@@ -1,4 +1,4 @@
-<html>
+<html ng-app="myApp">
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -6,17 +6,18 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="myScript.js"></script>
 </head>
 
-<body>
+<body ng-controller="MainCtrl">
   <div>
     <div id="title">Good Search</div>
     <div>
       <div >
-        <input id="searchInput" type="text" placeholder="Type your key words" class="col-md-7 col-md-offset-2"></input>
+        <input id="searchInput" type="text" ng-model="searchKeyWord" placeholder="Type your key words" class="col-md-7 col-md-offset-2"></input>
       </div>
-      <button id="searchBtn" class="btn btn-default col-md-1">Search</button>
+      <button id="searchBtn" ng-click="search()"class="btn btn-default col-md-1">Search</button>
     </div>
     <div>
       <div id="chart_div"></div>
