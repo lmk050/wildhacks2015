@@ -1,32 +1,36 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="build" name="wildhacks2015">
     <property environment="env"/>
   
-    <property name="target" value=“1.8”/>
-    <property name="source" value=“1.8”/>
+  
     <path id="wildhacks2015.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/org.restlet.jar"/>
         <pathelement location="lib/org.restlet.ext.json.jar"/>
         <pathelement location="lib/org.json.jar"/>
     </path>
-    <target name="clean">
-        <delete dir=“dist””>
-    </target>
+   
  
-    <target depends=“jar” name="build"/>
+    <target depends="jar" name="build"/>
+
+    <target name="clean">
+	<delete dir="dist" />
+	<delete dir="classes" />
+	<mkdir dir="classes" />
+	<mkdir dir="dist" />
+    </target>
     
 
-    <target depends=“clean” name="compile">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir=“classes” includeantruntime="false" source="${source}" target="${target}">
+    <target  depends="clean" name="compile">
+        
+        <javac  destdir="classes" includeantruntime="false">
             <src path="src"/>
             <classpath refid="wildhacks2015.classpath"/>
         </javac>
     </target>
     
-    <target depends=“compile” name=“jar”>
-       <jar destfile=“dist/wildhacks.jar" basedir="classes"/>
+    <target depends="compile" name="jar">
+       <jar destfile="dist/wildhacks.jar" basedir="classes"/>
     </target>
 
   
