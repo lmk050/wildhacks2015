@@ -18,8 +18,7 @@ function drawBackgroundColor() {
 
   var options = {
     'title': 'Your search on Google trends',
-    'width':400,
-    'height':300,
+    'height':400,
     hAxis: {
       title: 'Time',
       format : 'M/d/yy'
@@ -28,7 +27,8 @@ function drawBackgroundColor() {
       title: 'Trend Index'
     },
     backgroundColor: 'inherit',
-    padding: '80px'
+    padding: '80px',
+    legend: { position: 'bottom' }
   };
 
   var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
