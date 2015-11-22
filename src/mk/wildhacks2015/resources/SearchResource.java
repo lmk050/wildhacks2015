@@ -21,10 +21,15 @@ public class SearchResource extends ServerResource {
 	final private  String TREND_URL="http://www.google.com/trends/fetchComponent?q=%s&cid=TIMESERIES_GRAPH_0&export=3";
 	final private  String SEARCH_URL ="http://api.nytimes.com/svc/search/v2/articlesearch.json?q=%s&begin_date=%s&end_date=%s&api-key=%s";
 	final private  String SEARCH_KEY="bd0a99fdeeea6c231f5704f947b361f5%3A9%3A69615058";
+	final private  String DOC_IMG_HOST="http://www.nytimes.com";
+	
 	final private  String NEW_DATE="new Date(";
 	final private  int WEIGHT=15;
+	
+	private Client client = null;
 	private static String lastKW=null;
 	private static String lastResponse=null;
+	
 	
 	@Get("json")
 	public StringRepresentation represent() throws ResourceException, IOException {
@@ -47,13 +52,13 @@ public class SearchResource extends ServerResource {
 	
 	public static void main(String[] args) throws ResourceException, IOException, JSONException {
 		SearchResource sr = new SearchResource();
-		System.out.println(sr.trend("isis"));
+		System.out.println(sr.trend("thanksgiving"));
 	}
 	
 	protected  String trend(String kw) throws ResourceException, IOException, JSONException
 	{
 		HashMap<Integer,Object[]> hm= new HashMap<Integer,Object[]>();
-		Client client = new Client(new Context(), Protocol.HTTP);
+		Client client = getClient();
 		ClientResource clientResource = new ClientResource(String.format(TREND_URL, kw));
 		clientResource.setNext(client);
 		String responseStr= clientResource.get().getText();
@@ -122,7 +127,7 @@ public class SearchResource extends ServerResource {
 	{
 		month+=1;
 		String dateStr=String.valueOf(year)+String.valueOf(month<10?"0"+month:month);	
-		Client client = new Client(new Context(), Protocol.HTTP);
+		Client client = getClient();
 		ClientResource clientResource = new ClientResource(new Reference(String.format(SEARCH_URL, kw, dateStr+"01", dateStr+"30",SEARCH_KEY)));
 		clientResource.setNext(client);
 		String responseStr= clientResource.get().getText();
@@ -139,11 +144,25 @@ public class SearchResource extends ServerResource {
 			JSONObject newJson= new JSONObject();
 			newJson.put("url",jsonObject.getString("web_url"));
 			newJson.put("headline",jsonObject.getJSONObject("headline").get("main"));
-			newJson.put("imageURL",mediaLength>0?jsonObject.getJSONArray("multimedia").getJSONObject(mediaLength>2?1:0).getString("url"):new JSONArray());
+			String imageURL=mediaLength>0?jsonObject.getJSONArray("multimedia").getJSONObject(mediaLength>2?1:0).getString("url"):null;
+			if(imageURL!=null && !imageURL.startsWith("http"))
+			{
+				if(!imageURL.startsWith("/"))
+					imageURL="/"+imageURL;
+				imageURL=DOC_IMG_HOST+imageURL;
+			}
+			newJson.put("imageURL",imageURL!=null?imageURL: new JSONArray());
 			newJsonArr.put(newJson);
 			j++;
 			
 		}
 		return new JSONObject().put("docs",newJsonArr);
+	}
+	
+	private Client getClient()
+	{
+		if(client == null)
+			client = new Client(new Context(), Protocol.HTTP);
+		return client;
 	}
 }
