@@ -1,7 +1,18 @@
-body{
+body {
   background: #333;
+  color: #ddd;
+  font-family: "Roboto", sans-serif;
+}
+
+#title {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 6rem;
+  padding: 50px;
+  letter-spacing: .33rem;
+  text-transform: uppercase;
 }
 
 #search {
-  padding: 50px;
+  color: #333;
 }
