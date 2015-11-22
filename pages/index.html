@@ -5,18 +5,19 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript" src="myScript.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="myScript.js"></script>
 </head>
 
 <body>
   <div>
     <div id="title">Good Search</div>
-
-    <div id="search" class="row">
-      <input class="col-md-8 col-md-offset-2"></input>
+    <div>
+      <div >
+        <input id="searchInput" type="text" placeholder="Type your key words" class="col-md-7 col-md-offset-2"></input>
+      </div>
+      <button id="searchBtn" class="btn btn-default col-md-1">Search</button>
     </div>
-
     <div>
       <div id="chart_div"></div>
     </div>
